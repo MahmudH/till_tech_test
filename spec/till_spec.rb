@@ -4,22 +4,16 @@ require 'json'
 describe Till do
 
     file = File.read('./spec/test_data/hipstercoffee.json')
-    @shop_details = JSON.parse(file)
-  #let(:menu){ double(:menu, :store_details => [{
-    #"shopName": "The Coffee Connection",
-    #"address": "123 Lakeside Way",
-    #"prices": [{ "Cafe Latte": 4.75 }]
-  #}]) }
+    let(:store_details){ JSON.parse(file) }
 
-  let(:menu){ double(:menu, @shop_details) }
+  let(:menu){ double(:menu, :shop_details => store_details[0]) }
 
-  let(:menu_klass){ double(:menu_klass, :new => :menu)}
+  let(:menu_klass){ double(:menu_klass, :new => menu)}
   subject(:till){ described_class.new(menu_klass) }
 
   context "#initialize" do
     it "initializes with shop details" do
-      #expect(till.menu.store_details[0]["prices"][0]).to eq("Cafe Latte": 4.7)
-      expect(till.menu.store_details).to include("Cafe Latte")
+      expect(till.menu.shop_details["prices"][0]).to include("Cafe Latte")
     end
   end
 
