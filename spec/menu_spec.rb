@@ -5,7 +5,7 @@ describe Menu do
 
   let(:json_file){ './spec/test_data/hipstercoffee.json' }
 
-  let(:json_klass) { double(:json_klass, :parse => [{"shopName": "The Coffee Connection", "address": "123 Lakeside Way"}]) }
+  let(:json_klass) { double(:json_klass, :parse => [{"shopName": "The Coffee Connection", "address": "123 Lakeside Way", "phone": "123", "prices": ["Caffe Latte": 4.75]}]) }
 
 
 
@@ -20,11 +20,23 @@ describe Menu do
   end
 
   context "show shop detail from the json" do
+
     it "displays the shop name" do
-      puts "the menu contains"
-      puts menu_details[0]["shopName"]
       expect(menu.shop_name).to eq("The Coffee Connection")
     end
+
+    it "displays the shop address" do
+      expect(menu.shop_address).to eq("123 Lakeside Way")
+    end
+
+    it "displays the shop phone number" do
+      expect(menu.shop_phone).to eq("123")
+    end
+
+    it "displays the product lists and prices" do
+      expect(menu.shop_prices).to eq("Caffe Latte": 4.75)
+    end
+
   end
 
 end
