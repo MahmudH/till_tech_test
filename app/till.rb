@@ -1,15 +1,12 @@
 require_relative 'menu'
-#require 'json'
-#file = File.read('./hipstercoffee.json')
-#data_hash = JSON.parse(file)
+require_relative 'data'
 
 class Till
 
   attr_reader :menu, :total_items, :sum
 
-  def initialize(menu_klass = Menu)
-    @menu_klass = menu_klass
-    @menu = @menu_klass.new
+  def initialize(menu = Menu.new)
+    @menu = menu
     @total_items = Hash.new
     @sum = 0
   end
